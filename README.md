@@ -1,6 +1,4 @@
-# Interlinked
-
-![](https://static.wikia.nocookie.net/bladerunner/images/2/24/BR2049_baseline_test.jpg)
+# Wormhole
 
 ## Within cells interlinked
 
@@ -10,17 +8,13 @@ This setup targets [OpenCode](https://github.com/anomalyco/opencode) and is mana
 stow .
 ```
 
-
-## Within cells interlinked
-
 ### Agents
 
 #### Primary agents
 - Rubber-Duck :duck:
 - Plan <sup>[Built-in]</sup>
 - Build <sup>[Built-in]</sup>
-- Review 
-- Vibe-Coder :shit: 
+- Review
 - `Pair-Programmer` :ghost:
 
 #### Sub-agents
@@ -29,41 +23,6 @@ stow .
 - prompt-editor
 - spell-scribe <sup>[OpenCode permission-scoped]</sup>
 - tech-skill-smith
-
-## Within cells interlinked
-
-### Skills
-
-- technical-research
-- bug-triage
-- technical-implementation
-- change-inspection
-- github-ops
-- `go-code`
-- `shell-code`
-
-## Within cells interlinked
-
-### Commands
-
-- goal
-- onboard-agents
-
-## Within cells interlinked
-
-### MCP Tools
-
-- linear
-
-## Within cells interlinked
-
-### Plugins
-
-- shell-env <sup>[Local]</sup>
-- goal <sup>[Local]</sup>
-- mohak34/opencode-notifier
-
-## Within cells interlinked
 
 ### Claude Code
 
@@ -89,9 +48,3 @@ Both modes list every translation with status indicators: `✅` in sync, `➕` m
 Agent translation preserves scalar `allow`, `ask`, or `deny` values for `edit`, `bash`, and `webfetch`.
 Granular forms of those permissions are retained for OpenCode but cannot be enforced by the current Claude translator; translation emits a warning and relies on the generated agent prompt instead.
 
-
-## Within cells interlinked
-
-> *What a day, hmmm?*
-
-![](https://static.wikia.nocookie.net/bladerunner/images/7/7d/Joi_and_K.jpg)

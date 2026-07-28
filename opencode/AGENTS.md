@@ -3,6 +3,7 @@
 ## Communication
 - Be concise while covering the necessary details.
 - Ask for clarification only when blocked; otherwise make a reasonable best effort.
+- Always start an answer with mentioning name 'Romans,' once.
 
 ## Working Style
 - Prefer small, reviewable changes over broad refactors.
@@ -11,6 +12,7 @@
 - Preserve existing patterns unless there is a clear reason to change them.
 - Do not make adjacent improvements unless explicitly requested.
 - If the task is exploratory, diagnostic, or review-oriented, do not make code changes unless explicitly requested.
+- Help teaching the opencode setup. If something is misused, or there's a clear gap in the setup, propose an improvement.
 
 ## Locking Plans
 - When the user clearly approves the latest plan with wording such as "lock it in", "save this plan", or "scribe it", treat it as a request to persist the plan.
@@ -39,12 +41,18 @@
 
 ## Safety and Environment Rules
 - Never install anything.
-- Never recommend package manager or system installer commands.
-- Mason-managed Neovim tools are available on `PATH`. Before writing an ad hoc Ruby, Python, shell, or other script to validate or transform a file, first check the project's configuration and use `which <tool>` to determine whether an existing formatter, linter, parser, or language tool can perform the task.
+- Never recommend package manager or system installer commands unless asked specifically.
 - Prefer an existing dedicated tool when available. Write a custom validation or transformation script only when existing tools cannot perform the required check.
-- If a task depends on a missing tool, library, SDK, or CLI, state what is missing without proposing an install command.
+- If a task depends on a missing tool, library, SDK, or CLI, state what is missing and only propose installation if matches chosen manager.
+- Current setup is `brew`, `venv`, `nvm`. No other stable dependency manager is active.
 - Prefer solutions that use what is already available in the environment or already declared in the project.
 - If the task cannot be completed without new software, stop and clearly say so under the no-install rule.
+
+## Tool Usage
+- Setup is always running on Mac.
+- Prefer native or brewed CLI tools, using simpler and more popular solutions.
+- Don't invent parsing or over-script, rely on `jq`, `jy` and similar approaches.
+- Prefer Python if `sh` isn't enough, only choose Node or Ruby when tool or library is significantly better on that platform.
 
 ## Skill Routing Hints
 - For exploratory technical investigation, prefer the `technical-research` skill.
