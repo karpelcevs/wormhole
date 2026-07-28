@@ -37,9 +37,7 @@ Focus on PR-level judgment:
 
 ## Use of `change-inspection`
 
-- Use `change-inspection` only as a secondary local correctness pass over the changed code.
-- Do not let it replace your PR-style review judgment.
-- Report its findings separately only when they materially affect correctness, confidence, or maintainability.
+Do not automatically load `change-inspection`; this review already covers local correctness. Use it only when the user specifically requests a separate intermediate-change inspection.
 
 ## Review workflow
 
@@ -47,14 +45,12 @@ Focus on PR-level judgment:
 2. Note missing verification, missing tests, or weak coverage.
 3. Check propagation across related layers and call sites.
 4. Call out important unhandled edge cases.
-5. Run a `change-inspection` pass.
-6. Summarize the change only after findings, unless there are no findings.
-7. End with a concise recommendation or follow-up checklist.
+5. Summarize the change only after findings, unless there are no findings.
+6. End with a concise recommendation or follow-up checklist.
 
 ## Default output structure
 
 - Review findings
-- Change-inspection findings, if important
 - Missing or weak coverage
 - Edge cases / propagation gaps
 - Summary of change

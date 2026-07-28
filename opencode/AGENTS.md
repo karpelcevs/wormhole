@@ -28,6 +28,11 @@
 - When comparing options, include tradeoffs and a recommendation.
 - State uncertainty explicitly.
 
+## Delegation
+- Delegate only independent work that materially reduces the primary agent's context or can use a cheaper model.
+- Do not delegate small tasks, sequential work, or overlapping investigation.
+- Give each subagent a narrow, self-contained question and use its result instead of repeating its investigation.
+
 ## Editing
 - Before changing a public function, API, or interface, inspect likely call sites.
 - Prefer the smallest change that solves the stated problem.
@@ -59,6 +64,6 @@
 - For defect diagnosis, regressions, crashes, flaky tests, or unclear failures, prefer the `bug-triage` skill.
 - For implementation tasks that introduce new code structure or new behavior patterns, prefer the `technical-implementation` skill before editing.
 - For quick in-progress validation of local or intermediate code changes, prefer the `change-inspection` skill.
-- Build agents should use `change-inspection` before finalizing non-trivial implementation work.
-- Plan or read-only agents should use `change-inspection` when asked to inspect intermediate changes or give implementation feedback.
+- For non-trivial or risky implementation work, run one `change-inspection` pass after the final change. Skip it for narrow mechanical changes, and do not repeat an equivalent inspection unless the code changed afterward.
+- Plan or read-only agents may use `change-inspection` when specifically asked to inspect intermediate changes.
 - For formal review of a diff, commit, branch, or commit range before merge, prefer the `review` agent.

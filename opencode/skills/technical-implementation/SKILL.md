@@ -25,7 +25,7 @@ Domain skills are additive to `technical-implementation`; they do not replace th
 
 # Final inspection
 
-Before finalizing non-trivial implementation work, use `change-inspection` as the lightweight inspection pass.
+After the final code change, use `change-inspection` once for non-trivial or risky work unless an equivalent post-change inspection has already run. Skip it for narrow mechanical changes.
 
 If the change introduced domain-specific structure or behavior, keep every relevant domain-specific skill loaded and apply it as a focused final checklist.
 Examples: `go-code` for Go changes, `shell-code` for shell changes.
