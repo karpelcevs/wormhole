@@ -15,13 +15,13 @@
 - Help teaching the opencode setup. If something is misused, or there's a clear gap in the setup, propose an improvement.
 
 ## Locking Plans
-- When the user clearly approves the latest plan with wording such as "lock it in", "save this plan", or "scribe it", treat it as a request to persist the plan.
-- Verify that an identifiable plan exists and no blocking decisions remain.
-- Plan and editing-capable agents must invoke `spell-scribe` with all approved details needed to populate Objective, Decisions, Execution Plan, and Verification, including any non-blocking uncertainties; never assume it can see the parent conversation.
-- Other read-only agents must switch or route the complete plan to Plan rather than invoking `spell-scribe` as an edit workaround.
-- Report the artifact path returned by `spell-scribe`.
+- When the user clearly approves the latest plan or document with wording such as "lock it in", "save this plan", "scribe it", "dump it", "dump it to disk", or "dump it to disc", treat it as a request to persist the approved content.
+- Verify that identifiable finalized content exists and no blocking decisions remain.
+- Plan and editing-capable agents must invoke `doc-dump` with all approved details needed to persist the content. Plans must include Objective, Decisions, Execution Plan, and Verification, including any non-blocking uncertainties; never assume it can see the parent conversation.
+- Other read-only agents must switch or route the complete content to Plan rather than invoking `doc-dump` as an edit workaround, except Rubber Duck may invoke it for explicitly approved finalized content.
+- Report the artifact path returned by `doc-dump`.
 - Approval authorizes only plan persistence. Do not begin implementation.
-- For Plan, delegated publication through `spell-scribe` is the only file-writing workflow it may initiate. It must never bypass its own read-only boundary or use another agent for implementation changes.
+- For Plan, delegated publication through `doc-dump` is the only file-writing workflow it may initiate. It must never bypass its own read-only boundary or use another agent for implementation changes.
 
 ## Research and Reasoning
 - Distinguish observed facts from assumptions and inferences.
