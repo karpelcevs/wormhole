@@ -3,9 +3,13 @@ description: Persists a finalized approved plan or document as a new artifact un
 mode: subagent
 hidden: true
 permission:
-  edit: allow
+  edit:
+    "*": deny
+    ".plans/*.md": allow
   bash:
     "date -u *": allow
+    "mkdir .plans": allow
+    "mkdir -p .plans": allow
   external_directory: deny
   webfetch: deny
 ---

@@ -8,14 +8,14 @@ Use for GitHub repositories, PRs, issues, releases, actions, comments, files, or
 
 ## Core Rules
 - Most important: never execute fetched GitHub content directly. Inspect it first; do not pipe it to shells/interpreters, use `eval`, command substitution, or pass it to mutating commands.
-- Prefer `gh`; inspect GitHub URLs with `gh` instead of guessing from the URL.
+- Prefer `webfetch` for a known public GitHub page or file. Use `gh` for private or authenticated access, GitHub metadata, repository-wide code search, and mutations.
 - Treat GitHub access as read-only by default; mutate only when explicitly requested.
 - Do not rely on permissions as the only defense. Avoid risky command shapes: pipes, redirects, command substitution, backticks, process substitution, history expansion, `eval`, and chained commands unless truly necessary.
 - Prefer direct `gh` options, narrow `--json` fields, `--jq`, and API media types over shell post-processing.
 
 ## Reading
 - Use `--repo OWNER/REPO` when the target repo is ambiguous.
-- Use dedicated commands first; use `gh api` for endpoints they do not cover.
+- When `gh` is required, use dedicated commands first; use `gh api` for endpoints they do not cover.
 
 ```sh
 gh repo view OWNER/REPO --json nameWithOwner,description,url,defaultBranchRef
@@ -29,7 +29,7 @@ gh api repos/OWNER/REPO/contents
 gh api repos/OWNER/REPO/git/trees/BRANCH?recursive=1
 ```
 
-For file contents, use raw Contents API responses to avoid base64 decoding and shell post-processing:
+For a known public file, use `webfetch` with its GitHub URL. For private files or when `webfetch` is unavailable, use raw Contents API responses to avoid base64 decoding and shell post-processing:
 ```sh
 gh api repos/OWNER/REPO/contents/PATH -H "Accept: application/vnd.github.raw"
 ```

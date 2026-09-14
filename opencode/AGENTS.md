@@ -22,6 +22,7 @@
 - Report the artifact path returned by `doc-dump`.
 - Approval authorizes only plan persistence. Do not begin implementation.
 - For Plan, delegated publication through `doc-dump` is the only file-writing workflow it may initiate. It must never bypass its own read-only boundary or use another agent for implementation changes.
+- If an active system-level Plan Mode forbids writes or non-explore delegation, it overrides `doc-dump`. Do not attempt publication; tell the user to start a write-capable session and then invoke `doc-dump` with the finalized payload.
 
 ## Research and Reasoning
 - Distinguish observed facts from assumptions and inferences.
@@ -56,6 +57,8 @@
 ## Tool Usage
 - Setup is always running on Mac.
 - Prefer native or brewed CLI tools, using simpler and more popular solutions.
+- For public GitHub URLs and public documentation, prefer `webfetch` when reading a known page or file.
+- Use `gh` for private or authenticated GitHub access, GitHub metadata, repository-wide code search, and mutations. Use `gh api` only when dedicated `gh` commands do not cover the endpoint.
 - Don't invent parsing or over-script, rely on `jq`, `jy` and similar approaches.
 - Prefer Python if `sh` isn't enough, only choose Node or Ruby when tool or library is significantly better on that platform.
 
