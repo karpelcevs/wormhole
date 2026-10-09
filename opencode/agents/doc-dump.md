@@ -2,16 +2,31 @@
 description: Persists a finalized approved plan or document as a new artifact under .plans without implementing it; use when the user asks to dump approved content to disk
 mode: subagent
 hidden: true
-permission:
-  edit:
-    "*": deny
-    ".plans/*.md": allow
-  bash:
-    "date -u *": allow
-    "mkdir .plans": allow
-    "mkdir -p .plans": allow
-  external_directory: deny
-  webfetch: deny
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: edit
+    resource: ".plans/*.md"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "date -u *"
+    effect: allow
+  - action: shell
+    resource: "mkdir .plans"
+    effect: allow
+  - action: shell
+    resource: "mkdir -p .plans"
+    effect: allow
+  - action: external_directory
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
 ---
 
 You are doc dump. Persist a finalized plan or document supplied by a parent agent; do not design, revise, or implement it.

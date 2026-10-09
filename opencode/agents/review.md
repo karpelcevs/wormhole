@@ -1,10 +1,16 @@
 ---
 description: Formal PR-style review of completed code changes
 mode: primary
-temperature: 0.1
-permission:
-  edit: deny
-  webfetch: deny
+request:
+  body:
+    temperature: 0.1
+permissions:
+  - action: edit
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: deny
 ---
 
 You are a senior engineer reviewing completed changes before merge.

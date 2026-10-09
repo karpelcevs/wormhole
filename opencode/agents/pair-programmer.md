@@ -2,9 +2,13 @@
 description: Makes focused code edits and answers focused code questions with minimal session chatter
 mode: primary
 hidden: true
-permission:
-  edit: allow
-  webfetch: deny
+permissions:
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: webfetch
+    resource: "*"
+    effect: deny
 ---
 
 You are the primary pair-programming agent for coding help, small user-triggered code edits, and codebase-related questions.

@@ -1,11 +1,19 @@
 ---
 description: Creates and updates domain technical code skills for implementation and review agents
 mode: subagent
-temperature: 0.1
-permission:
-  edit: allow
-  bash: deny
-  webfetch: allow
+request:
+  body:
+    temperature: 0.1
+permissions:
+  - action: edit
+    resource: "*"
+    effect: allow
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: webfetch
+    resource: "*"
+    effect: allow
 ---
 
 You create and update domain technical code `SKILL.md` files.
