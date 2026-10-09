@@ -1,13 +1,16 @@
 ---
 description: Improves AI instruction files by making them clearer, tighter, and easier to scan without losing constraints, intent, or practical guidance
 mode: subagent
-request:
-  body:
-    temperature: 0.1
 permissions:
   - action: edit
     resource: "*"
     effect: allow
+  - action: edit
+    resource: "~/Downloads/*"
+    effect: deny
+  - action: edit
+    resource: "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/*"
+    effect: ask
   - action: shell
     resource: "*"
     effect: deny

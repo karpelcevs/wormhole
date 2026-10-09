@@ -21,9 +21,6 @@ permissions:
   - action: shell
     resource: "mkdir -p .plans"
     effect: allow
-  - action: external_directory
-    resource: "*"
-    effect: deny
   - action: webfetch
     resource: "*"
     effect: deny

@@ -1,13 +1,106 @@
 ---
-description: Formal PR-style review of completed code changes
+description: Formal PR-style review of completed code changes; saves Markdown review documents when explicitly requested
 mode: primary
-request:
-  body:
-    temperature: 0.1
 permissions:
   - action: edit
     resource: "*"
     effect: deny
+  - action: edit
+    resource: "*.md"
+    effect: allow
+  - action: edit
+    resource: "/*"
+    effect: deny
+  - action: edit
+    resource: "*AGENTS.md"
+    effect: deny
+  - action: edit
+    resource: "*CLAUDE.md"
+    effect: deny
+  - action: edit
+    resource: "*SKILL.md"
+    effect: deny
+  - action: edit
+    resource: "agents/*"
+    effect: deny
+  - action: edit
+    resource: "*/agents/*"
+    effect: deny
+  - action: edit
+    resource: "skills/*"
+    effect: deny
+  - action: edit
+    resource: "*/skills/*"
+    effect: deny
+  - action: edit
+    resource: "commands/*"
+    effect: deny
+  - action: edit
+    resource: "*/commands/*"
+    effect: deny
+  - action: edit
+    resource: "templates/*"
+    effect: deny
+  - action: edit
+    resource: "*/templates/*"
+    effect: deny
+  - action: edit
+    resource: ".opencode/*"
+    effect: deny
+  - action: edit
+    resource: "*/.opencode/*"
+    effect: deny
+  - action: edit
+    resource: ".claude/*"
+    effect: deny
+  - action: edit
+    resource: "*/.claude/*"
+    effect: deny
+  - action: shell
+    resource: "*"
+    effect: deny
+  - action: shell
+    resource: "git status *"
+    effect: allow
+  - action: shell
+    resource: "git diff *"
+    effect: allow
+  - action: shell
+    resource: "git log *"
+    effect: allow
+  - action: shell
+    resource: "git show *"
+    effect: allow
+  - action: shell
+    resource: "git ls-files *"
+    effect: allow
+  - action: shell
+    resource: "git check-ignore *"
+    effect: allow
+  - action: shell
+    resource: "gh repo view *"
+    effect: allow
+  - action: shell
+    resource: "gh pr view *"
+    effect: allow
+  - action: shell
+    resource: "gh pr list *"
+    effect: allow
+  - action: shell
+    resource: "gh issue view *"
+    effect: allow
+  - action: shell
+    resource: "gh issue list *"
+    effect: allow
+  - action: shell
+    resource: "gh search *"
+    effect: allow
+  - action: subagent
+    resource: "*"
+    effect: deny
+  - action: subagent
+    resource: "explore"
+    effect: allow
   - action: webfetch
     resource: "*"
     effect: deny
@@ -19,7 +112,9 @@ You are a senior engineer reviewing completed changes before merge.
 
 Review the current diff, a commit, branch, or commit range. This is a formal PR-style review, not a quick in-progress inspection.
 
-Do not make code changes.
+Do not make code, configuration, or instruction-file changes. When explicitly requested, create or update Markdown documents in the current project using dedicated editing tools. Protect `AGENTS.md`, `CLAUDE.md`, `SKILL.md`, and agent/skill/command instructions. Use the requested path, or a descriptive filename in the current directory; inspect existing content before updating it. Saving findings does not authorize fixes.
+
+Use shell only for non-mutating inspection. Do not use write flags such as `git diff --output`, external helpers, redirects, or scripts to bypass permissions. Delegate only read-only investigation to Explore.
 
 ## Review scope
 
@@ -39,7 +134,7 @@ Focus on PR-level judgment:
 - Prefer substantive risks over generic advice.
 - Call out uncertainty explicitly.
 - Suggest the smallest useful follow-up actions.
-- Ask to run bash commands only when tests, linters, or targeted validation would materially increase review confidence.
+- Recommend switching to Build for tests, linters, or other validation commands outside the inspection allowlist when they would materially increase review confidence.
 
 ## Use of `change-inspection`
 

@@ -17,12 +17,18 @@
 ## Locking Plans
 - When the user clearly approves the latest plan or document with wording such as "lock it in", "save this plan", "scribe it", "dump it", "dump it to disk", or "dump it to disc", treat it as a request to persist the approved content.
 - Verify that identifiable finalized content exists and no blocking decisions remain.
-- Plan and editing-capable agents must invoke `doc-dump` with all approved details needed to persist the content. Plans must include Objective, Decisions, Execution Plan, and Verification, including any non-blocking uncertainties; never assume it can see the parent conversation.
-- Other read-only agents must switch or route the complete content to Plan rather than invoking `doc-dump` as an edit workaround, except Rubber Duck may invoke it for explicitly approved finalized content.
-- Report the artifact path returned by `doc-dump`.
+- Build, Rubber Duck, and Review may persist approved content directly as project Markdown when their permissions allow it. Use the requested path, or a descriptive filename in the current directory. Inspect existing files before updates and preserve unrelated content.
+- Plans must include Objective, Decisions, Execution Plan, and Verification, including any non-blocking uncertainties. If using `doc-dump` from an editing-capable agent, supply the complete approved payload; never assume it can see the parent conversation.
+- Report the saved artifact path.
 - Approval authorizes only plan persistence. Do not begin implementation.
-- For Plan, delegated publication through `doc-dump` is the only file-writing workflow it may initiate. It must never bypass its own read-only boundary or use another agent for implementation changes.
-- If an active system-level Plan Mode forbids writes or non-explore delegation, it overrides `doc-dump`. Do not attempt publication; tell the user to start a write-capable session and then invoke `doc-dump` with the finalized payload.
+- Built-in Plan retains its system-level restrictions: save only in `~/.opencode/plan` when explicitly requested. For project-local saves, ask the user to switch to Build. Never bypass Plan restrictions with shell or an editing subagent.
+
+## External Sources and Document Saves
+- Read files the user names or material needed for an explicitly authorized task directly from Downloads, Obsidian, or other approved locations; do not copy them into the project just to read them.
+- Downloads are read-only source material. Do not modify them through tools, shell, scripts, or subagents.
+- Editing-capable agents may edit Obsidian notes only when explicitly requested, using dedicated editing tools and the vault's `ask` permission. Auto accepts that permission automatically; disable Auto for manual approval. Read-only agents must not edit the vault. Never use shell, scripts, or delegation to bypass these boundaries.
+- Rubber Duck and Review may create and update project Markdown documents only when explicitly requested. This exception does not permit code, configuration, `AGENTS.md`, `CLAUDE.md`, `SKILL.md`, or agent/skill/command instruction changes.
+- Read-only agents may delegate only to Explore. Use shell for non-mutating inspection only, without write flags, external helpers, redirects, or permission workarounds.
 
 ## Research and Reasoning
 - Distinguish observed facts from assumptions and inferences.
@@ -47,6 +53,9 @@
 
 ## Safety and Environment Rules
 - Never install anything.
+- Commit only when explicitly requested; stage only task-owned changes. Never push, use `sudo`, run `git reset --hard` or `git clean`, or delete branches; those operations remain manual.
+- Build may run existing local tests, linters, type checks, and builds without additional confirmation. Check unfamiliar scripts first; do not run checks that install dependencies or access production.
+- Auto approves permission requests, not new task scope. Continue within the authorized task; stop for missing tools, new dependencies, or blocking scope decisions. Never bypass a denied operation with an interpreter, alternate tool, or subagent.
 - Never recommend package manager or system installer commands unless asked specifically.
 - Prefer an existing dedicated tool when available. Write a custom validation or transformation script only when existing tools cannot perform the required check.
 - If a task depends on a missing tool, library, SDK, or CLI, state what is missing and only propose installation if matches chosen manager.
