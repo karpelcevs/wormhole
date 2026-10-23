@@ -1,4 +1,5 @@
---target=~/.config
+--target=~/.config/opencode
+--no-folding
 --dotfiles
 --ignore=\.stowrc
 --ignore=\.DS_Store

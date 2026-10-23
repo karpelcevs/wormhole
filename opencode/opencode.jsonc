@@ -13,8 +13,7 @@
     },
     "explore": {
       "permissions": [
-        { "action": "edit", "resource": "*", "effect": "deny" },
-        { "action": "shell", "resource": "*", "effect": "deny" }
+        { "action": "edit", "resource": "*", "effect": "deny" }
       ]
     }
   },
@@ -51,6 +50,29 @@
     { "action": "shell", "resource": "gh issue view *", "effect": "allow" },
     { "action": "shell", "resource": "gh issue list *", "effect": "allow" },
     { "action": "shell", "resource": "gh search *", "effect": "allow" },
+    { "action": "shell", "resource": "pwd *", "effect": "allow" },
+    { "action": "shell", "resource": "ls *", "effect": "allow" },
+    { "action": "shell", "resource": "cat *", "effect": "allow" },
+    { "action": "shell", "resource": "head *", "effect": "allow" },
+    { "action": "shell", "resource": "tail *", "effect": "allow" },
+    { "action": "shell", "resource": "wc *", "effect": "allow" },
+    { "action": "shell", "resource": "rg *", "effect": "allow" },
+    { "action": "shell", "resource": "grep *", "effect": "allow" },
+    { "action": "shell", "resource": "jq *", "effect": "allow" },
+    { "action": "shell", "resource": "file *", "effect": "allow" },
+    { "action": "shell", "resource": "readlink *", "effect": "allow" },
+    { "action": "shell", "resource": "which *", "effect": "allow" },
+    { "action": "shell", "resource": "test *", "effect": "allow" },
+    { "action": "shell", "resource": "[ *", "effect": "allow" },
+    { "action": "shell", "resource": "true *", "effect": "allow" },
+    { "action": "shell", "resource": "printf *", "effect": "allow" },
+    { "action": "shell", "resource": "sort *", "effect": "allow" },
+    { "action": "shell", "resource": "stow --simulate *", "effect": "allow" },
+    { "action": "shell", "resource": "opencode debug *", "effect": "allow" },
+    { "action": "shell", "resource": "sort *-o *", "effect": "ask" },
+    { "action": "shell", "resource": "sort *--output *", "effect": "ask" },
+    { "action": "shell", "resource": "*>*", "effect": "ask" },
+    { "action": "shell", "resource": "*<*", "effect": "ask" },
     { "action": "edit", "resource": "~/Downloads/*", "effect": "deny" },
     { "action": "edit", "resource": "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/*", "effect": "deny" },
     { "action": "shell", "resource": "sudo *", "effect": "deny" },

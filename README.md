@@ -4,9 +4,17 @@
 
 This setup targets [OpenCode](https://github.com/anomalyco/opencode) and is managed with [GNU Stow](https://www.gnu.org/software/stow/).
 
+Run from the wormhole repository root:
+
+```sh
+# Preview link updates and stale-link cleanup
+stow --simulate --verbose --restow opencode
+
+# Apply
+stow --verbose --restow opencode
 ```
-stow .
-```
+
+`.stowrc` targets `~/.config/opencode` and disables directory folding so managed files are linked individually. Runtime files and dependencies remain local. Restow removes stale package links; existing regular files that conflict with managed files must be reconciled first.
 
 ### Agents
 
@@ -51,9 +59,11 @@ Auto accepts `ask` requests; it never overrides an effective `deny`. Do not assu
 - Every agent can read named files in Downloads and the Obsidian vault without copying them. Other external directories normally ask; Auto accepts those requests. OpenCode's managed output/temp and global config directories are explicitly allowed.
 - Downloads remain read-only. Obsidian edits use `ask` in Build, Pair Programmer, General, Prompt Editor, and Tech Skill Smith; read-only agents remain blocked. Edit notes only when explicitly requested. Disable Auto if you want manual approval, since Auto accepts `ask` automatically. Agent-specific vault rules follow the general edit allowance because the last matching rule wins.
 - Commits require an explicit request. Pushes, `sudo`, hard Git resets, `git clean`, and branch deletion remain manual. Build may remove individual project files when necessary for the requested change.
+- Package installation and package-manager execution commands remain denied. Use declared project scripts or an existing local executable for validation; add a narrower exception only when a concrete workflow requires one.
 - Rubber Duck and Review can create or update project Markdown on request: “Save this as `notes.md`” or “Update `review.md` with these findings.” Code, configuration, and agent/skill/command instruction files remain protected.
 - Built-in Plan keeps its restrictions. Switch to Build to save a plan alongside the project files; no custom Planner is added.
-- Read-only agents can delegate only to Explore and have a narrow Git/GitHub-inspection shell allowlist. Build/Auto keeps flexible shell access.
+- Read-only agents can delegate only to Explore. They inherit the global shell policy, which allows routine file, search, Git, and GitHub inspection; other commands ask, while explicit safety denials remain authoritative. Build/Auto keeps flexible shell access.
+- Routine local validation also allows `jq`, file/tool identification, simple shell predicates, status output, sorting, and `opencode debug`. Stow is prompt-free only in dry-run form with `--simulate` as its first option; real Stow operations still ask. Output redirection and sort output-file options also ask.
 
 Scope, explicit-request requirements, and avoiding source mutations through shell are behavioral instructions. Shell is not sandboxed; command patterns cannot cover every script, alias, flag arrangement, or indirect side effect. Later agent/project rules can override ordinary permissions, so inspect the effective rules when adding an agent. Markdown wildcards also match nested documents, not just root files. The documented experimental policy format was rejected by the installed 2.0.26 runtime; this setup uses verified ordinary permission rules instead.
 
